@@ -46,7 +46,7 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-	<context:component-scan base-package="kr.jbuniv.m" />
+	<context:component-scan base-package="org.kipres.www" />
 	<!-- <task:scheduler id="jobScheduler" pool-size="10" /> 
 	<task:annotation-driven scheduler="jobScheduler" /> -->
 
