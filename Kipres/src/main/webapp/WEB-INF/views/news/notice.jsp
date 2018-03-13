@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
 
 <c:import url="../module/header.jsp"></c:import>
 	<div id="sub_wrapper">
@@ -31,10 +32,39 @@
 				</div>
 				
 				<div>
-					
-				</div>
-				
-				<div>
+					<table border="1" width="600px">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>이름</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+<!-- 					<c:if test="${noticePage.hasNoNotices()}">
+
+						<tr>
+							<td colspan="4">게시글이 없습니다.</td>
+						</tr>
+
+						</c:if>
+-->
+					<c:forEach var="list" items="${list}">
+						<tr>
+							<td>
+								${list.ntNum}
+							</td>
+							<td>
+								<a href="noticeDetail?ntNum=${list.ntNum}">
+									<c:out value="${list.ntTitle}"/>
+								</a>
+							</td>
+							<td>...</td>
+							<td>${list.ntInsertDate}</td>
+							<td>${list.ntHit}</td>
+						</tr>
+					</c:forEach>
+					</table>
+
 					<a href="notice_writeArticle">글쓰기</a>
 				</div>
 

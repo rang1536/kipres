@@ -28,15 +28,37 @@
 	)
 </insert>
 
-<select id="selectCount" parameterType="org.kipres.www.domain.Notice">
+<select id="selectCount" resultType="Integer">
 	SELECT COUNT(*) 
 	FROM KIPRES.NOTICE
 </select>
 
-<select id="selectNotice" parameterType="org.kipres.www.domain.Notice">
+<select id="selectNotice" resultType="org.kipres.www.domain.Notice">
 	SELECT * 
-	FROM KIPRES.NOTICE 
+	FROM KIPRES.NOTICE
 	ORDER BY nt_num DESC
 </select>
+
+<select id="selectNotice2" resultType="org.kipres.www.domain.Notice" parameterType="org.kipres.www.util.BPaging">
+    SELECT nt_num, nt_title, nt_insert_date, nt_hit
+    	FROM (
+      	SELECT nt_num, nt_title, nt_insert_date, nt_hit
+      	, ROW_NUMBER() OVER(ORDER BY nt_num DESC) KI_NOTICE_SEQ
+     FROM KIPRES.NOTICE)
+     WHERE KI_NOTICE_SEQ BETWEEN ${rowStart} AND ${rowEnd}
+     ORDER BY nt_num
+</select>
+
+<select id="selectNoticeOne" resultType="org.kipres.www.domain.Notice" parameterType="int">
+	SELECT *
+	FROM KIPRES.NOTICE
+	WHERE nt_num = #{ntNum}
+</select>
+
+<update id="updateNoticeRead" parameterType="int">
+	UPDATE KIPRES.NOTICE
+	SET nt_hit = nt_hit + 1
+	WHERE nt_num=#{ntNum}
+</update>
 
 </mapper>

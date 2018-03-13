@@ -6,8 +6,8 @@ public class Notice {
 	private int ntNum;
 	private String ntTitle;
 	private String ntContents;
-	private Date ntInsertDate;
-	private Date ntUpdate;
+	private String ntInsertDate;
+	private String ntUpdate;
 	private int ntHit;
 	private int userNum;
 	
@@ -30,16 +30,16 @@ public class Notice {
 	public void setNtContents(String ntContents) {
 		this.ntContents = ntContents;
 	}
-	public Date getNtInsertDate() {
+	public String getNtInsertDate() {
 		return ntInsertDate;
 	}
-	public void setNtInsertDate(Date ntInsertDate) {
+	public void setNtInsertDate(String ntInsertDate) {
 		this.ntInsertDate = ntInsertDate;
 	}
-	public Date getNtUpdate() {
+	public String getNtUpdate() {
 		return ntUpdate;
 	}
-	public void setNtUpdate(Date ntUpdate) {
+	public void setNtUpdate(String ntUpdate) {
 		this.ntUpdate = ntUpdate;
 	}
 	public int getNtHit() {
