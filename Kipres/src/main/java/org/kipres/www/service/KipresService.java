@@ -27,32 +27,39 @@ public class KipresService {
 		return kipresDao.selectNotice();
 	}
 	
-    public Integer selectCount() throws Exception {
+	// 공지사항 전체 게시글수
+    public Integer selectCount() {
 		return kipresDao.selectCount();
     }
     
+    // 게시글 상세보기 
     public Notice selectNoticeOne(int param) {
     	Notice notice = kipresDao.selectNoticeOne(param);
     	System.out.println("공지 조회값 확인  : "+notice);
     	return notice;
     }
     
+    //게시글 수정
     public int updateNoticeRead(int param) {
     	return kipresDao.updateNoticeRead(param);
     }
 	
+    //게시글 삭제
     public int deleteNotice(int param) {
     	return kipresDao.deleteNotice(param);
     }
     
+    //
     public int modifyNotice(Notice notice) {
     	return kipresDao.modifyNotice(notice);
     }
     
-    public int insertFile(MultipartHttpServletRequest request, Path path) {
+    public int insertFile(MultipartHttpServletRequest request) {
     	UtilFile utilFile = new UtilFile();
-    	path = utilFile.singleUploadFile(request, "notice", "notice");
+    	Path path = utilFile.singleUploadFile(request, "notice", "notice");
+    	System.out.println("path 값 : " + path);
     	int result = kipresDao.insertFile(path);
+    	System.out.println("result 값 : " + result);
     	return result;
 		
     }

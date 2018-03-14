@@ -91,7 +91,6 @@
 		#{fileName},
 		#{fileRandomName},
 		#{fileType}
-		
 	)
 	
 </insert>

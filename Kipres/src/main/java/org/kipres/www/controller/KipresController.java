@@ -22,16 +22,18 @@ public class KipresController {
 		return "news/notice_writeArticle";
 	}
 	
-	// 공지 디비에 입력
+	// 공지사항 디비에 입력
 	@RequestMapping(value="/notice_writeSuccess", method = RequestMethod.POST)
-	public String insert(MultipartHttpServletRequest request, Model model, Notice notice, Path path) {
-		System.out.println("입력값 확인 : "+notice);
-		int fResult = kipresService.insertFile(request, path);//파일 경로 입력
+	public String insert(MultipartHttpServletRequest request, Model model, Notice notice) {
+		System.out.println("입력값 확인 : "+ notice);
+//		System.out.println("입력값 확인 : "+ path);
+		System.out.println("입력값 확인 : "+ request);
+		int fResult = kipresService.insertFile(request);//파일 경로 입력
 		int bResult = kipresService.addNotice(notice);//제목 및 내용 입력
 		
 		if(fResult == 0 || bResult == 0) { //입력실패
 			model.addAttribute("insertResult", "게시글이 등록되지 않았습니다.");
-		} else if(fResult == 0 && bResult == 0){ //입력성공 - 목록페이지로 이동
+		} else if(fResult == 0 && bResult == 0){ //입력성공 
 			model.addAttribute("insertResult", "게시글이 등록되었습니다.");
 		}
 		return "news/notice_writeSuccess";
@@ -68,6 +70,7 @@ public class KipresController {
 		return "news/notice_deleteSuccess";
 	}
 	
+	// 공지사항 해당 게시글 출력
 	@RequestMapping(value="/noticeModify", method = RequestMethod.GET)
 	public String modifyForm(@RequestParam(value="ntNum", defaultValue="0")int ntNum, Model model) {
 		System.out.println("ntNum의 값 : " + ntNum);
@@ -79,6 +82,7 @@ public class KipresController {
 		return "news/notice_modifyNotice";
 	}
 	
+	//공지사항 수정
 	@RequestMapping(value="/modifySuccess", method = RequestMethod.POST)
 	public String modify(@RequestParam(value="ntNum", defaultValue="0")int ntNum, Model model, Notice notice) {
 		System.out.println("ntNum의 값 : " + ntNum);

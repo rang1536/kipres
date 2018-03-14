@@ -16,7 +16,7 @@ public class UtilFile {
 			/*String rootPath = "/home/hosting_users/kis0488/tomcat/webapps/survey/resources/files/"+classNum+"/";*/
 			
 			//로컬
-			String rootPath = "C:\\Users\\202\\Desktop\\uploadFile"+classNum+"\\";
+			String rootPath = "C:\\Users\\KANG\\Desktop\\upload\\"+classNum+"\\";
 			
 			if(type.equals("notice")) {
 				return uploadFile(request.getFile("noticeFile"), rootPath, 1, classNum);
@@ -37,15 +37,14 @@ public class UtilFile {
 			Path uploadFile = new Path();
 			try {
 				String originalName = multipartFile.getOriginalFilename(); //원래 파일명
-				String fileRandomName = UUID.randomUUID().toString().replaceAll("-", "");
 		        String fileName = originalName; //DB에 저장될 파일명
-		        fileName = fileName.replace("-", "");
+		        fileName = UUID.randomUUID().toString().replaceAll("-", "");//랜덤파일명 생성
 		        String savePath = rootPath + fileName;
 		        File destFile = new File(savePath); //최종파일을 업로드 패쓰에 업로드
 		        multipartFile.transferTo(destFile);
 		        uploadFile.setFilePath(path);
-		        uploadFile.setFileName(fileName);
-		        uploadFile.setFileRandomName(fileRandomName);
+		        uploadFile.setFileName(originalName);
+		        uploadFile.setFileRandomName(fileName);
 		        uploadFile.setFileType(type);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
