@@ -34,9 +34,8 @@
 				</div>
 				
 				<div>
-					<h2>새 글이 등록되었습니다.</h2>
-					<a href="notice">돌아가기</a>
-					
+					<h2>${insertResult}</h2>
+					<a href="notice">목록보기</a>
 				</div>
 
 			</div>

@@ -4,10 +4,7 @@ public class Path {
 	private int fileNum;
 	private String filePath;
 	private String fileName;
-	private int ntNum;
-	private int refNum;
-	private int tsNum;
-	private int galNum;
+	private int fileType;
 	private String fileRandomName;
 	
 	public int getFileNum() {
@@ -28,29 +25,11 @@ public class Path {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public int getNtNum() {
-		return ntNum;
+	public int getFileType() {
+		return fileType;
 	}
-	public void setNtNum(int ntNum) {
-		this.ntNum = ntNum;
-	}
-	public int getRefNum() {
-		return refNum;
-	}
-	public void setRefNum(int refNum) {
-		this.refNum = refNum;
-	}
-	public int getTsNum() {
-		return tsNum;
-	}
-	public void setTsNum(int tsNum) {
-		this.tsNum = tsNum;
-	}
-	public int getGalNum() {
-		return galNum;
-	}
-	public void setGalNum(int galNum) {
-		this.galNum = galNum;
+	public void setFileType(int fileType) {
+		this.fileType = fileType;
 	}
 	public String getFileRandomName() {
 		return fileRandomName;
@@ -58,12 +37,10 @@ public class Path {
 	public void setFileRandomName(String fileRandomName) {
 		this.fileRandomName = fileRandomName;
 	}
-	
 	@Override
 	public String toString() {
-		return "Path [fileNum=" + fileNum + ", filePath=" + filePath + ", fileName=" + fileName + ", ntNum=" + ntNum
-				+ ", refNum=" + refNum + ", tsNum=" + tsNum + ", galNum=" + galNum + ", fileRandomName="
-				+ fileRandomName + "]";
+		return "Path [fileNum=" + fileNum + ", filePath=" + filePath + ", fileName=" + fileName + ", fileType="
+				+ fileType + ", fileRandomName=" + fileRandomName + "]";
 	}
 	
 }

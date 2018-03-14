@@ -49,16 +49,51 @@
      ORDER BY nt_num
 </select>
 
-<select id="selectNoticeOne" resultType="org.kipres.www.domain.Notice" parameterType="int">
+<select id="selectNoticeOne" resultType="org.kipres.www.domain.Notice">
 	SELECT *
 	FROM KIPRES.NOTICE
 	WHERE nt_num = #{ntNum}
 </select>
 
-<update id="updateNoticeRead" parameterType="int">
+<update id="updateNoticeRead">
 	UPDATE KIPRES.NOTICE
 	SET nt_hit = nt_hit + 1
 	WHERE nt_num=#{ntNum}
 </update>
+
+<delete id="deleteNotice">
+	DELETE FROM KIPRES.NOTICE
+	WHERE nt_num=#{ntNum}
+</delete>
+
+<update id="modifyNotice" parameterType="org.kipres.www.domain.Notice">
+	UPDATE KIPRES.NOTICE
+	SET nt_title = #{ntTitle}, nt_contents = #{ntContents}
+	WHERE nt_num = #{ntNum}
+</update>
+
+<insert id="insertFile" parameterType="org.kipres.www.domain.Path">
+	<selectKey keyProperty="fileNum" resultType="int" order="BEFORE">
+		SELECT kipres_Path_seq.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO KIPRES.PATH
+	(
+		file_num,
+		file_path,
+		file_name,
+		file_random_name,
+		file_type
+	)
+	VALUES
+	(
+		#{fileNum},
+		#{filePath},
+		#{fileName},
+		#{fileRandomName},
+		#{fileType}
+		
+	)
+	
+</insert>
 
 </mapper>

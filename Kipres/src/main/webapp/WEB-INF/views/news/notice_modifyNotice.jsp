@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+<head>
 
+</head>
+<body>
 <c:import url="../module/header.jsp"></c:import>
 	<div id="sub_wrapper">
 		<div id="sub_con_wrapper">
@@ -32,42 +34,24 @@
 				</div>
 				
 				<div>
-					<table border="1" style="width:600px">
-						<caption>게시판</caption>
-						<colgroup>
-							<col width='15%' />
-							<col width='*%' />
-						</colgroup>
-						<tbody>
-							
-							<tr>
-								<td>제목</td> 
-								<td><c:out value="${noticeInfo.ntTitle}"/></td> 
-							</tr>
-							<tr>
-								<td>작성자</td> 
-								<td><c:out value="...."/></td> 
-							</tr>
-							<tr>
-								<td>게시일</td> 
-								<td><c:out value="${noticeInfo.ntInsertDate}"/></td> 
-							</tr>
-							<tr>
-								<td>내용</td> 
-								<td><c:out value="${noticeInfo.ntContents}"/></td> 
-							</tr>
-						</tbody>
-					</table>
-					<a href="notice">돌아가기</a>
-					<a href="noticeDelete?ntNum=<c:out value="${noticeInfo.ntNum}"/>">삭제</a>
-					<a href="noticeModify?ntNum=<c:out value="${noticeInfo.ntNum}"/>">수정</a>
+					<h2>게시글 수정</h2>
+					<form action="modifySuccess?ntNum=${modifyNotice.ntNum}" method="post">
+					    <div>
+					        제목
+					        <input type="text" name="ntTitle" size="80" value="${modifyNotice.ntTitle}">
+					    </div>
+					    <div>
+					        내용
+					        <textarea name="ntContents" id="ntContents" rows="4" cols="80">${modifyNotice.ntContents}</textarea>
+					    </div>
+					    <div style="width:650px; text-align: center;">
+					        <input type="submit" value="글 수정">
+					    </div>
+					</form>
 				</div>
-				
+
 			</div>
-			
 		</div>
-		
 	</div>
-	
-	
+</body>	
 <c:import url="../module/footer.jsp"></c:import>

@@ -35,15 +35,18 @@
 				
 				<div>
 					<h2>게시글 작성</h2>
-					<form action="notice_writeSuccess" method="post">
+					<form action="notice_writeSuccess" method="post" enctype="multipart/form-data">
 					    <div>
 					        제목
-					        <input name="ntTitle" id="ntTitle" size="80" placeholder="제목을 입력해주세요">
+					        <input type="text" name="ntTitle" size="80" placeholder="제목을 입력해주세요">
 					    </div>
 					    <div>
 					        내용
 					        <textarea name="ntContents" id="ntContents" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
 					    </div>
+					    <br/>
+					    <input type="file" name="noticeFile">
+					    <br/><br/>
 					    <div style="width:650px; text-align: center;">
 					        <input type="submit" value="새 글 등록">
 					    </div>

@@ -3,7 +3,7 @@ package org.kipres.www.dao;
 import java.util.List;
 
 import org.kipres.www.domain.Notice;
-import org.kipres.www.util.BPaging;
+import org.kipres.www.domain.Path;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,5 +38,17 @@ public class KipresDao {
 	
 	public int updateNoticeRead(int param) {
 		return sqlSession.update("KipresDao.updateNoticeRead", param);
+	}
+	
+	public int deleteNotice(int param) {
+		return sqlSession.delete("KipresDao.deleteNotice", param);
+	}
+	
+	public int modifyNotice(Notice notice) {
+		return sqlSession.update("KipresDao.modifyNotice", notice);
+	}
+	
+	public int insertFile(Path path) {
+		return sqlSession.insert("kipresDao.insertFile", path);
 	}
 }
