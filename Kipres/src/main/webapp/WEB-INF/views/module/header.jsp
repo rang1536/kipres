@@ -58,7 +58,7 @@ $(document).ready(function(){
 <div id="wrapper">
 	<div id="quick_wrapper">
 		<div id="quick_con_wrapper">
-			<a href="#">로그인</a> <a href="#">회원가입</a>
+			<a href="login">로그인</a> <a href="joinStep1">회원가입</a>
 		</div>
 	</div>
 	

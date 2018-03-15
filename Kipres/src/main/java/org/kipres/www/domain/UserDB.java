@@ -6,6 +6,8 @@ public class UserDB {
 	private String userHP;
 	private String userMail;
 	private int userGrade;
+	private String userId;
+	private String userPw;
 	public int getUserNum() {
 		return userNum;
 	}
@@ -36,11 +38,23 @@ public class UserDB {
 	public void setUserGrade(int userGrade) {
 		this.userGrade = userGrade;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserPw() {
+		return userPw;
+	}
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
+	}
 	
 	@Override
 	public String toString() {
 		return "UserDB [userNum=" + userNum + ", userName=" + userName + ", userHP=" + userHP + ", userMail=" + userMail
-				+ ", userGrade=" + userGrade + "]";
+				+ ", userGrade=" + userGrade + ", userId=" + userId + ", userPw=" + userPw + "]";
 	}
 	
 }

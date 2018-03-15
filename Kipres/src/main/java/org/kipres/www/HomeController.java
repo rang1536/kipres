@@ -11,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * Handles requests for the application home page.
  */
+@SessionAttributes("user")
 @Controller
 public class HomeController {
 	
@@ -124,5 +127,27 @@ public class HomeController {
 		return "directions/direction";
 	}
 	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		return "login";
+	}
+	
+	@RequestMapping(value="/joinStep2", method = RequestMethod.POST)
+	public String joinStep2(@RequestParam(value="agree", defaultValue="false")Boolean agree) {
+		if(!agree) {
+			return "joinStep1";
+		}
+		return "joinStep2";
+	}
+	
+	@RequestMapping(value="/joinStep2", method = RequestMethod.GET)
+	public String joinStep2Get() {
+		return "redirect:/joinStep1";
+	}
+	
+	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
+	public String joinStep1(Model model) {
+		return "joinStep1";
+	}
 	
 }

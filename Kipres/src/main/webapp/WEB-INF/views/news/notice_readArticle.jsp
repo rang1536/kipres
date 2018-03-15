@@ -53,9 +53,16 @@
 								<td><c:out value="${noticeInfo.ntInsertDate}"/></td> 
 							</tr>
 							<tr>
+								<td>첨부파일</td>
+								<td><a href="http://sh86.kr/resources/img/edit.jpg">
+								첨부 다운
+								</a></td> 
+							</tr>
+							<tr>
 								<td>내용</td> 
 								<td><c:out value="${noticeInfo.ntContents}"/></td> 
 							</tr>
+							
 						</tbody>
 					</table>
 					<a href="notice">돌아가기</a>

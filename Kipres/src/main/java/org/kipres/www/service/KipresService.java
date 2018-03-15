@@ -5,6 +5,7 @@ import java.util.List;
 import org.kipres.www.dao.KipresDao;
 import org.kipres.www.domain.Notice;
 import org.kipres.www.domain.Path;
+import org.kipres.www.domain.UserDB;
 import org.kipres.www.util.UtilFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,16 +55,25 @@ public class KipresService {
     	return kipresDao.modifyNotice(notice);
     }
     
+    //파일 업로드
     public int insertFile(MultipartHttpServletRequest request) {
     	UtilFile utilFile = new UtilFile();
     	Path path = utilFile.singleUploadFile(request, "notice", "notice");
-    	System.out.println("path 값 : " + path);
+//    	System.out.println("path 값 : " + path);
     	int result = kipresDao.insertFile(path);
-    	System.out.println("result 값 : " + result);
+//    	System.out.println("result 값 : " + result);
     	return result;
-		
     }
-//	public List<Notice> selectNotice2(BPaging param) throws Exception {
-//		return kipresDao.selectNotice2(param);
-//    }
+/*	public List<Notice> selectNotice2(BPaging param) throws Exception {
+		return kipresDao.selectNotice2(param);
+    }*/
+    
+  //회원가입시 아이디 중복체크
+  	public UserDB selectUserBefore() {
+  		return kipresDao.selectUserBefore();
+  	}
+    
+    public int insertUser(UserDB user) {
+    	return kipresDao.insertUser(user);
+    }
 }

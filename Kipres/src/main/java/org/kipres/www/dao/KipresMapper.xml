@@ -73,9 +73,10 @@
 </update>
 
 <insert id="insertFile" parameterType="org.kipres.www.domain.Path">
-	<selectKey keyProperty="fileNum" resultType="int" order="BEFORE">
-		SELECT kipres_Path_seq.NEXTVAL FROM DUAL
+ 	<selectKey keyProperty="fileNum" resultType="int" order="BEFORE">
+		SELECT kipres_path_seq.NEXTVAL FROM DUAL
 	</selectKey>
+
 	INSERT INTO KIPRES.PATH
 	(
 		file_num,
@@ -94,5 +95,48 @@
 	)
 	
 </insert>
+
+<select id="selectFile" parameterType="org.kipres.www.domain.Path" resultType="hashmap">
+	SELECT *
+	FROM KIPRES_PATH
+	WHERE FILE_NUM = #{fileNum}
+</select>
+
+<!-- <select id="selectUserId" parameterType="org.kipres.www.domain.UserDB" resultType="org.kipres.www.domain.UserDB">
+	SELECT *
+	FROM USERDB
+	WHERE USERID = #{userId}
+</select> -->
+
+ <!--회원가입 -->
+<insert id="insertUser" parameterType="org.kipres.www.domain.UserDB">
+	<selectKey keyProperty="userNum" resultType="int" order="BEFORE">
+		select KIPRES_USER_DB_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO KIPRES.USER_DB(
+		user_num,
+		user_id
+		user_pw,
+		user_name,
+		user_hp,
+		user_mail,
+		user_grade
+		)
+	VALUES(
+		#{userNum},
+		#{userId},
+		#{userPw}
+		#{userName},
+		#{userHp},
+		#{userMail},
+		#{userRank}
+		)
+</insert>
+
+<select id="selectUserBefore" parameterType="org.kipres.www.domain.UserDB">
+	SELECT *
+	FROM KIPRES.USER_DB
+	WHERE user_id = #{userId}
+</select>
 
 </mapper>
