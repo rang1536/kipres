@@ -34,23 +34,27 @@
 				
 				<div>
 					<h2>로그인</h2>
-					    <form name="form1" method="post">
+					    <form action="login" method="post">
+					    <c:if test="${errors.idOrPwNotMatch}">아이디와 비밀번호가 일치하지 않습니다.</c:if>
 					        <table border="1" width="400px">
 					            <tr>
 					                <td>아이디</td>
-					                <td><input name="userId" id="userId"></td>
+					                <td><input name="id" id="id" value="${param.id}">
+					                <c:if test="${errors.id}">ID를 입력하세요.</c:if>
+					                </td>
 					            </tr>
 					            <tr>
 					                <td>비밀번호</td>
-					                <td><input type="password" name="userPw" id="userPw"></td>
+					                <td><input type="password" name="password" id="password" >
+					                <c:if test="${errors.password}">비밀번호를 입력하세요.</c:if>
+					                </td>
 					            </tr>
 					            <tr>
 					                <td colspan="2" align="center">
-					                    <button type="button" id="btnLogin">로그인</button>
-					                    <a href="join">회원가입</a>
+					                    <input type="submit" value="로그인">
+					                    <a href="joinStep1">회원가입</a>
 					                </td>
 					            </tr>
-					            
 					        </table>
 					    </form>
 

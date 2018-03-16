@@ -1,6 +1,6 @@
 package org.kipres.www.domain;
 
-public class UserDB {
+public class UserDb {
 	private int userNum;
 	private String userName;
 	private String userHP;
@@ -8,6 +8,19 @@ public class UserDB {
 	private int userGrade;
 	private String userId;
 	private String userPw;
+	
+	public UserDb() {
+	}
+	
+	public UserDb(String userId, String userPw, String userName, String userMail, String userHP, int userGrade) {
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userMail = userMail;
+		this.userHP = userHP;
+		this.userGrade = userGrade;
+	}
+	
 	public int getUserNum() {
 		return userNum;
 	}
@@ -49,6 +62,10 @@ public class UserDB {
 	}
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
+	}
+	
+	public boolean matchPassword(String pwd) {
+		return this.userPw.equals(pwd);
 	}
 	
 	@Override

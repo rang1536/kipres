@@ -1,7 +1,5 @@
 package org.kipres.www.domain;
 
-import java.util.Date;
-
 public class Notice {
 	private int ntNum;
 	private String ntTitle;

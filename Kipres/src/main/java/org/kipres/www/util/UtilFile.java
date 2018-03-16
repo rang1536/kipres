@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.kipres.www.domain.Path;
-import org.kipres.www.service.UploadFileException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 

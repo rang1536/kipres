@@ -1,9 +1,17 @@
 package org.kipres.www;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.kipres.www.domain.Notice;
 import org.kipres.www.service.KipresService;
+import org.kipres.www.util.AlreadyExistingMemberException;
+import org.kipres.www.util.AuthInfo;
+import org.kipres.www.util.IdPasswordNotMatchingException;
+import org.kipres.www.util.RegisterRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +20,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * Handles requests for the application home page.
  */
-@SessionAttributes("user")
+
 @Controller
 public class HomeController {
 	
@@ -140,14 +147,68 @@ public class HomeController {
 		return "joinStep2";
 	}
 	
-	@RequestMapping(value="/joinStep2", method = RequestMethod.GET)
-	public String joinStep2Get() {
-		return "redirect:/joinStep1";
-	}
-	
 	@RequestMapping(value="/joinStep1", method = RequestMethod.GET)
 	public String joinStep1(Model model) {
 		return "joinStep1";
 	}
 	
+	@RequestMapping(value="/joinStep2", method = RequestMethod.GET)
+	public String joinStep2Get() {
+		return "redirect:/joinStep1";
+	}
+	
+	@RequestMapping(value="/joinStep3", method = RequestMethod.POST)
+	public String joinStep3(RegisterRequest regReq, Model model) {
+		Map<String, Boolean> errors = new HashMap<String, Boolean>();
+		model.addAttribute("errors", errors);
+
+		regReq.validate(errors);
+		
+		if(errors.isEmpty()) {
+			return "joinStep2";
+		}
+		
+		try {
+			kipresService.regist(regReq);
+			return "joinStep3";
+		} catch(AlreadyExistingMemberException aeme) {
+			errors.put("duplicateId", Boolean.TRUE);
+			return "joinStep2";
+		}
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String submit(@RequestParam(value="id", defaultValue="null") String id,
+						 @RequestParam(value="password", defaultValue="null") String password,
+						 Model model,
+						 HttpSession session) {
+		Map<String, Boolean> errors = new HashMap<String, Boolean>();
+		model.addAttribute(errors);
+		
+		if(id == null || id.isEmpty()) {
+			errors.put("id", Boolean.TRUE);
+		} 
+		if(password == null || password.isEmpty()) {
+			errors.put("password", Boolean.TRUE);
+		}
+		
+		if(errors.isEmpty()) {
+			return "login";
+		}
+		
+		try {
+			AuthInfo authInfo = kipresService.login(id, password);
+			session.setAttribute("authInfo", authInfo);
+			
+			return "loginSuccess";
+		} catch(IdPasswordNotMatchingException e) {
+			errors.put("idOrPwNotMatch", Boolean.TRUE);
+			return "login";
+		}
+	}
+	
+	@RequestMapping(value="/loginSuccess", method=RequestMethod.POST)
+	public String loginSuccess(Model model) {
+		return "loginSuccess";
+	}
 }

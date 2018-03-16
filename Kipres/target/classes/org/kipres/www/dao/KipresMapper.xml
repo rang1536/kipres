@@ -102,38 +102,45 @@
 	WHERE FILE_NUM = #{fileNum}
 </select>
 
-<!-- <select id="selectUserId" parameterType="org.kipres.www.domain.UserDB" resultType="org.kipres.www.domain.UserDB">
+<!-- <select id="selectUserId" parameterType="org.kipres.www.domain.UserDb" resultType="org.kipres.www.domain.UserDb">
 	SELECT *
-	FROM USERDB
+	FROM USER_DB
 	WHERE USERID = #{userId}
 </select> -->
 
  <!--회원가입 -->
-<insert id="insertUser" parameterType="org.kipres.www.domain.UserDB">
+<insert id="insertUser" parameterType="org.kipres.www.domain.UserDb">
 	<selectKey keyProperty="userNum" resultType="int" order="BEFORE">
 		select KIPRES_USER_DB_SEQ.NEXTVAL FROM DUAL
 	</selectKey>
 	INSERT INTO KIPRES.USER_DB(
 		user_num,
-		user_id
+		user_id,
 		user_pw,
 		user_name,
 		user_hp,
 		user_mail,
-		user_grade
+		<if test="userGrade != null and userGrade != '' and userGrade != 0">user_grade</if>
 		)
 	VALUES(
 		#{userNum},
 		#{userId},
-		#{userPw}
+		#{userPw},
 		#{userName},
-		#{userHp},
+		#{userHP},
 		#{userMail},
-		#{userRank}
+		<if test="userGrade != null and userGrade != '' and userGrade != 0">#{userGrade}</if>
+		
 		)
 </insert>
 
-<select id="selectUserBefore" parameterType="org.kipres.www.domain.UserDB">
+<!-- <select id="selectUserBefore" parameterType="org.kipres.www.domain.UserDb">
+	SELECT *
+	FROM KIPRES.USER_DB
+	WHERE user_id = #{userId}
+</select> -->
+
+<select id="selectById" parameterType="String" resultType="org.kipres.www.domain.UserDb">
 	SELECT *
 	FROM KIPRES.USER_DB
 	WHERE user_id = #{userId}

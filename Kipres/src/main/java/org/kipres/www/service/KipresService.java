@@ -5,16 +5,26 @@ import java.util.List;
 import org.kipres.www.dao.KipresDao;
 import org.kipres.www.domain.Notice;
 import org.kipres.www.domain.Path;
-import org.kipres.www.domain.UserDB;
+import org.kipres.www.domain.UserDb;
+import org.kipres.www.util.AlreadyExistingMemberException;
+import org.kipres.www.util.AuthInfo;
+import org.kipres.www.util.IdPasswordNotMatchingException;
+import org.kipres.www.util.RegisterRequest;
 import org.kipres.www.util.UtilFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service
 public class KipresService {
 	@Autowired
 	private KipresDao kipresDao;
+	
+	public KipresService() {}
+	public KipresService(KipresDao kipresDao) {
+		this.kipresDao = kipresDao;
+	}
 	
 	// 공지 디비에 입력
 	public int addNotice(Notice notice) {
@@ -68,12 +78,59 @@ public class KipresService {
 		return kipresDao.selectNotice2(param);
     }*/
     
-  //회원가입시 아이디 중복체크
-  	public UserDB selectUserBefore() {
-  		return kipresDao.selectUserBefore();
-  	}
+//  //회원가입시 아이디 중복체크
+//  	public UserDB selectUserBefore() {
+//  		return kipresDao.selectUserBefore();
+//  	}
+//    
+//    public int insertUser(UserDB user) {
+//    	return kipresDao.insertUser(user);
+//    }
+//    
+    @Transactional
+	public int regist(RegisterRequest req) {
+		UserDb user = kipresDao.selectById(req.getUserId());
+		System.out.println("서비스 user값 체크 : " + user);
+		if (user != null) {
+			throw new AlreadyExistingMemberException("dup id " + req.getUserId());
+		}
+		System.out.println("user 값 : " + user);
+		UserDb newUser = new UserDb(
+				req.getUserId(),
+				req.getUserPw(),
+				req.getUserName(),
+				req.getUserMail(),
+				req.getUserHP(),
+				1
+				);
+				
+		int result = kipresDao.insertUser(newUser);
+		return result;
+	}
     
-    public int insertUser(UserDB user) {
-    	return kipresDao.insertUser(user);
+    public void setMemberDao(KipresDao kipresDao) {
+    	this.kipresDao = kipresDao;
+    }
+    
+//    public AuthInfo authenticate(String id, String password) {
+//    	UserDb user = kipresDao.selectById(id);
+//    	if(user == null) {
+//    		throw new IdPasswordNotMatchingException();
+//    	}
+//    	if(!user.matchPassword(password)) {
+//    		throw new IdPasswordNotMatchingException();
+//    	}
+//    	return new AuthInfo(user.getUserNum(), user.getUserId(), user.getUserName());
+//    }
+//    
+    public AuthInfo login(String id, String password) {
+    	UserDb user = kipresDao.selectById(id);
+    	if(user == null) {
+    		throw new IdPasswordNotMatchingException();
+    	}
+    	if(!user.matchPassword(password)) {
+    		throw new IdPasswordNotMatchingException();
+    	}
+    	return new AuthInfo(user.getUserId(), user.getUserName());
     }
 }

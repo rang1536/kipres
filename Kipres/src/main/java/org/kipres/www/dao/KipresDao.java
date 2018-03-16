@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.kipres.www.domain.Notice;
 import org.kipres.www.domain.Path;
-import org.kipres.www.domain.UserDB;
+import org.kipres.www.domain.UserDb;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,12 +57,20 @@ public class KipresDao {
 	}
 	
 	//회원가입시 아이디 중복체크
-	public UserDB selectUserBefore() {
+	public UserDb selectUserBefore() {
 		return sqlSession.selectOne("KipresDao.selectUserBefore");
 	}
 	
 	//회원가입 정보 DB에 입력
-	public int insertUser(UserDB user) {
+	public int insertUser(UserDb user) {
 		return sqlSession.insert("KipresDao.insertUser", user);
 	}
+	
+	//id 중복체크
+	public UserDb selectById(String id) {
+		UserDb user = sqlSession.selectOne("KipresDao.selectById", id);
+		System.out.println("dao user 값 : " + user);
+		return user;
+	}
+	
 }

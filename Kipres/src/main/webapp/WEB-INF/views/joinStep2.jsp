@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>​
 
 <c:import url="./module/header.jsp"></c:import>
 	<div id="sub_wrapper">
@@ -36,32 +35,40 @@
 					<form action="joinStep3" method="post">
 						<p>
 							<label> 아이디 :<br/>
-							<input type="text" name="userId" id="userId">
+							<input type="text" name="userId" id="userId" value="${registerRequest.userId}">
+							<c:if test="${errors.id}">Id를 입력하세요.</c:if>
+							<c:if test="${errors.duplicateId}">이미 사용중인 아이디입니다.</c:if>
 							</label>
 						</p>
 						<p>
 							<label> 비밀번호 :<br/>
 							<input type="password" name="userPw" id="userPw">
+							<c:if test="${errors.password}">비밀번호를 입력하세요.</c:if>
 							</label>
 						</p>
 						<p>
 							<label> 비밀번호 확인:<br/>
 							<input type="password" name="confirmUserPw" id="confirmUserPw">
+							<c:if test="${errors.notMatch}">비밀번호가 일치하지 않습니다.</c:if>
+							<c:if test="${errors.confirmPassword}">확인을 입력하세요.</c:if>
 							</label>
 						</p>
 						<p>
 							<label> 이름:<br/>
-							<input type="text" name="userName" id="userName">
+							<input type="text" name="userName" id="userName" value="${registerRequest.userName}">
+							<c:if test="${errors.name}">이름을 입력하세요.</c:if>
 							</label>
 						</p>
 						<p>
 							<label> 휴대폰 번호:<br/>
-							<input type="text" name="userHP" id="userHP">
+							<input type="text" name="userHP" id="userHP" value="${registerRequest.userHP}">
+							<c:if test="${errors.hp}">휴대폰 번호를 입력하세요.</c:if>
 							</label>
 						</p>
 						<p>
 							<label> 이메일:<br/>
-							<input type="text" name="userMail" id="userMail">
+							<input type="text" name="userMail" id="userMail" value="${registerRequest.userMail}">
+							<c:if test="${errors.mail}">이메일을 입력하세요.</c:if>
 							</label>
 						</p>
 						<input type="submit" value="가입 완료">

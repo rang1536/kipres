@@ -1,7 +1,6 @@
 package org.kipres.www.controller;
 
 import org.kipres.www.domain.Notice;
-import org.kipres.www.domain.Path;
 import org.kipres.www.service.KipresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,11 +90,9 @@ public class KipresController {
 		
 		if(result == 0) { //수정실패
 			model.addAttribute("modifyResult", "게시글 수정이 실패하였습니다.");
-			
 		} else if(result > 0){ //수정성공 - 목록페이지로 이동
 			model.addAttribute("modifyResult", "게시글이 수정되었습니다.");
 		}
-
 		return "news/notice_modifySuccess";
 	}
 	
