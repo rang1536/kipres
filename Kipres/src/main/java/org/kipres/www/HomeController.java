@@ -161,10 +161,12 @@ public class HomeController {
 	public String joinStep3(RegisterRequest regReq, Model model) {
 		Map<String, Boolean> errors = new HashMap<String, Boolean>();
 		model.addAttribute("errors", errors);
-
+		
+		System.out.println("regReq 값: " + regReq);
+		
 		regReq.validate(errors);
 		
-		if(errors.isEmpty()) {
+		if(!errors.isEmpty()) {
 			return "joinStep2";
 		}
 		
@@ -183,26 +185,36 @@ public class HomeController {
 						 Model model,
 						 HttpSession session) {
 		Map<String, Boolean> errors = new HashMap<String, Boolean>();
-		model.addAttribute(errors);
+		model.addAttribute("errors", errors);
+		System.out.println("id 값 : " + id);
+		System.out.println("pw 값 : " + password);
 		
 		if(id == null || id.isEmpty()) {
 			errors.put("id", Boolean.TRUE);
+			System.out.println("resultId 값 : " + errors.get("id"));
 		} 
 		if(password == null || password.isEmpty()) {
 			errors.put("password", Boolean.TRUE);
+			System.out.println("resultPw 값 : " + errors.get("password"));
 		}
 		
-		if(errors.isEmpty()) {
+//		System.out.println("resultId 값 : " + resultId);
+//		System.out.println("resultPw 값 : " + resultPw);
+		
+		if(!errors.isEmpty()) {
+			
 			return "login";
 		}
 		
 		try {
 			AuthInfo authInfo = kipresService.login(id, password);
+			
 			session.setAttribute("authInfo", authInfo);
 			
 			return "loginSuccess";
 		} catch(IdPasswordNotMatchingException e) {
 			errors.put("idOrPwNotMatch", Boolean.TRUE);
+			System.out.println("idOrPwNotMatch 값 : " + errors.get("idOrPwNotMatch"));
 			return "login";
 		}
 	}

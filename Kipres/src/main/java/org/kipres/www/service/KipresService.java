@@ -87,6 +87,7 @@ public class KipresService {
 //    	return kipresDao.insertUser(user);
 //    }
 //    
+    
     @Transactional
 	public int regist(RegisterRequest req) {
 		UserDb user = kipresDao.selectById(req.getUserId());
@@ -122,7 +123,7 @@ public class KipresService {
 //    	}
 //    	return new AuthInfo(user.getUserNum(), user.getUserId(), user.getUserName());
 //    }
-//    
+    
     public AuthInfo login(String id, String password) {
     	UserDb user = kipresDao.selectById(id);
     	if(user == null) {

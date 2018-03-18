@@ -9,12 +9,12 @@
 </head>
 <body>
 
-<c:if test="${! empty authUser}">
-	${authUser.name}님, 안녕하세요.
+<c:if test="${!empty authInfo}">
+	${authInfo.name}님, 안녕하세요.
 	<a href="logout">[로그아웃하기]</a>
 	<a href="changePwd">[비밀번호 변경하기]</a>
 </c:if>
-<c:if test="${empty authUser}">
+<c:if test="${empty authInfo}">
 	<a href="joinStep1">[회원가입하기]</a>
 	<a href="login">[로그인하기]</a>
 </c:if>
