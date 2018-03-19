@@ -27,6 +27,13 @@
 			<bean class="com.log4h.singletontrip.util.SessionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors> -->
+	
+<!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path:"/notice_writeArticle"/>
+			<bean class="org.kipres.www.util.AuthCheckInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
 
 	<mvc:annotation-driven />
 

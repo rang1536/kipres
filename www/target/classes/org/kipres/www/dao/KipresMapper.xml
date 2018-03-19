@@ -15,7 +15,7 @@
 		nt_insert_date
 		<if test="ntUpdate != null and ntUpdate != '' and ntUpdate != 0">,nt_update</if>
 		<if test="ntHit != null and ntHit != '' and ntHit != 0">,nt_hit</if>
-		<if test="userNum != null and userNum != '' and userNum != 0">,user_num</if>
+		<if test="userId != null and userId != '' and userId != 0">,user_id</if>
 		)
 	VALUES(
 		#{ntNum},
@@ -24,7 +24,7 @@
 		to_char(sysdate, 'YYYY-MM-DD')
 		<if test="ntUpdate != null and ntUpdate != '' and ntUpdate != 0">,#{ntUpdate}</if>
 		<if test="ntHit != null and ntHit != '' and ntHit != 0">,#{ntHit}</if>
-		<if test="userNum != null and userNum != '' and userNum != 0">,#{userNum}</if>
+		<if test="userId != null and userId != '' and userId != 0">,#{userId}</if>
 	)
 </insert>
 
@@ -110,11 +110,7 @@
 
  <!--회원가입 -->
 <insert id="insertUser" parameterType="org.kipres.www.domain.UserDb">
-	<selectKey keyProperty="userNum" resultType="int" order="BEFORE">
-		select KIPRES_USER_DB_SEQ.NEXTVAL FROM DUAL
-	</selectKey>
 	INSERT INTO KIPRES.USER_DB(
-		user_num,
 		user_id,
 		user_pw,
 		user_name,
@@ -123,7 +119,6 @@
 		<if test="userGrade != null and userGrade != '' and userGrade != 0">user_grade</if>
 		)
 	VALUES(
-		#{userNum},
 		#{userId},
 		#{userPw},
 		#{userName},

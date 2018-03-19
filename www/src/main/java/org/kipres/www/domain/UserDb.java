@@ -1,7 +1,6 @@
 package org.kipres.www.domain;
 
 public class UserDb {
-	private int userNum;
 	private String userName;
 	private String userHP;
 	private String userMail;
@@ -20,13 +19,7 @@ public class UserDb {
 		this.userHP = userHP;
 		this.userGrade = userGrade;
 	}
-	
-	public int getUserNum() {
-		return userNum;
-	}
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
-	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -70,7 +63,7 @@ public class UserDb {
 	
 	@Override
 	public String toString() {
-		return "UserDB [userNum=" + userNum + ", userName=" + userName + ", userHP=" + userHP + ", userMail=" + userMail
+		return "UserDB [userName=" + userName + ", userHP=" + userHP + ", userMail=" + userMail
 				+ ", userGrade=" + userGrade + ", userId=" + userId + ", userPw=" + userPw + "]";
 	}
 	

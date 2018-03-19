@@ -1,30 +1,28 @@
 package org.kipres.www.controller;
 
-import org.kipres.www.domain.Notice;
-import org.kipres.www.service.KipresService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class KipresController {
 	
-	@Autowired
+/*	@Autowired
 	private KipresService kipresService;
 	
+	// 공지사항 게시글 등록창
 	@RequestMapping(value="/notice_writeArticle", method = RequestMethod.GET)
-	public String write(Model model) {
+	public String write(Model model, @ModelAttribute AuthInfo authInfo) {
+		System.out.println("authInfo : " + authInfo);
+		if(authInfo == null) {
+			return "redirect:/login";
+		}
 		return "news/notice_writeArticle";
 	}
 	
-	// 공지사항 디비에 입력
+	// 공지사항 게시글 등록 
 	@RequestMapping(value="/notice_writeSuccess", method = RequestMethod.POST)
 	public String insert(MultipartHttpServletRequest request, Model model, Notice notice) {
 //		System.out.println("입력값 확인 : "+ notice);
+		
 		
 		int bResult = kipresService.addNotice(notice);//제목 및 내용 입력
 //		System.out.println("bResult 값 : " + bResult);
@@ -94,6 +92,6 @@ public class KipresController {
 			model.addAttribute("modifyResult", "게시글이 수정되었습니다.");
 		}
 		return "news/notice_modifySuccess";
-	}
+	}*/
 	
 }

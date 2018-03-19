@@ -7,7 +7,7 @@ public class Notice {
 	private String ntInsertDate;
 	private String ntUpdate;
 	private int ntHit;
-	private int userNum;
+	private String userId;
 	
 	
 	public int getNtNum() {
@@ -46,16 +46,16 @@ public class Notice {
 	public void setNtHit(int ntHit) {
 		this.ntHit = ntHit;
 	}
-	public int getUserNum() {
-		return userNum;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
+	public void setUserNum(String userId) {
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
 		return "Notice [ntNum=" + ntNum + ", ntTitle=" + ntTitle + ", ntContents=" + ntContents + ", ntInsertDate="
-				+ ntInsertDate + ", ntUpdate=" + ntUpdate + ", ntHit=" + ntHit + ", userNum=" + userNum + "]";
+				+ ntInsertDate + ", ntUpdate=" + ntUpdate + ", ntHit=" + ntHit + ", userId=" + userId + "]";
 	}
 
 	

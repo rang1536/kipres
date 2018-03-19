@@ -58,7 +58,7 @@
 									<c:out value="${list.ntTitle}"/>
 								</a>
 							</td>
-							<td>...</td>
+							<td>${authInfo.name}</td>
 							<td>${list.ntInsertDate}</td>
 							<td>${list.ntHit}</td>
 						</tr>

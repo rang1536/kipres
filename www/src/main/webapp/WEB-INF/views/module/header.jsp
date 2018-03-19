@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -59,7 +60,16 @@ $(document).ready(function(){
 <div id="wrapper">
 	<div id="quick_wrapper">
 		<div id="quick_con_wrapper">
-			<a href="login">로그인</a> <a href="joinStep1">회원가입</a>
+		<c:choose>
+			<c:when test="${authInfo.id==null}">
+				<a href="login">로그인</a> <a href="joinStep1">회원가입</a>
+			</c:when>
+			<c:otherwise>
+				${authInfo.name}님이 로그인중입니다.
+				<a href="logout">로그아웃</a>
+			</c:otherwise>
+		</c:choose>
+			
 		</div>
 	</div>
 	

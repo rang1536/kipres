@@ -1,7 +1,6 @@
 package org.kipres.www.util;
 
 public class AuthInfo {
-	private int authNo;
 	private String id;
 	private String name;
 	
@@ -11,16 +10,21 @@ public class AuthInfo {
 		this.name = name;
 	}
 
-	public int getId() {
-		return authNo;
-	}
-
-	public String getEmail() {
+	public String getId() {
 		return id;
 	}
-
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "AuthInfo [id=" + id + ", name=" + name + "]";
 	}
 	
 }

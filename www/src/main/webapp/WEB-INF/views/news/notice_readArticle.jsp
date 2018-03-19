@@ -46,7 +46,7 @@
 							</tr>
 							<tr>
 								<td>작성자</td> 
-								<td><c:out value="...."/></td> 
+								<td><c:out value="${authInfo.name}"/></td> 
 							</tr>
 							<tr>
 								<td>게시일</td> 
