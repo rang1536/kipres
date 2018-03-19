@@ -304,7 +304,7 @@ div, section { display:block; }
 	width:100%;
 	height:auto;
 	overflow:hidden;
-	background:url(../../../kipres2/resources/images/sub_bg.jpg) center 0 no-repeat;
+	background:url(../../../www/resources/images/sub_bg.jpg) center 0 no-repeat;
 }
 
 #sub_con_wrapper {
@@ -329,7 +329,7 @@ div, section { display:block; }
 	width:180px;
 	height:170px;
 	padding:50px 0 0 20px;
-	background:url(../../../kipres2/resources/images/left_title_bg.jpg) no-repeat;
+	background:url(../../../www/resources/images/left_title_bg.jpg) no-repeat;
 }
 
 #left_title > span {
